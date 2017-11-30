@@ -54,7 +54,7 @@ func RealIP(ctx *fasthttp.RequestCtx) string {
 	hdrForwardedFor := string(ctx.Request.Header.Peek("X-Forwarded-For"))
 
 	if len(hdrForwardedFor) == 0 && len(hdrRealIP) == 0 {
-		return ipAddrFromRemoteAddr(ctx.RemoteAddr)
+		return ipAddrFromRemoteAddr(string(ctx.RemoteAddr()))
 	}
 
 	// X-Forwarded-For is potentially a list of addresses separated with ","
